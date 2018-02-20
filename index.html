@@ -19,31 +19,28 @@
     <div class="content container">
         <div class="row">
             <div class="master-ingredients col align-self-center">
-                <div class="btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="checkbox" checked autocomplete="off"> Sausage
-                    </label>
-                </div>
-                <div class="btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="checkbox" checked autocomplete="off"> Eggs
-                    </label>
-                </div>
-                <div class="btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="checkbox" checked autocomplete="off"> Waffle
-                    </label>
-                </div>
-                <div class="btn-group-toggle" data-toggle="buttons">
-                    <label class="btn btn-secondary active">
-                        <input type="checkbox" checked autocomplete="off"> Waffle
-                    </label>
-                </div>
+                <button type="button" class="btn btn-primary">Sausage</button>
+                <button type="button" class="btn btn-primary">Eggs</button>
+                <button type="button" class="btn btn-primary">Cheese</button>
+                <button type="button" class="btn btn-primary">Mushroom</button>
+                <button type="button" class="btn btn-primary">Waffle</button>
+                <button type="button" class="btn btn-primary">Wheat Bread</button>
+            </div>
+        </div>
+        <div class="row">
+            <div id="grill" class="col align-self-center">
             </div>
         </div>
     </div>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
     <script src="./node_modules/popper.js/dist/popper.min.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            $(".master-ingredients btn").click(function() {
+                
+            });
+        })
+    </script>
 </body>
 </html>

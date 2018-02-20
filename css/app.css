@@ -24,7 +24,8 @@ nav {
   .content .master-ingredients {
     display: flex;
     justify-content: center;
-    background-color: #eee; }
-  .content .btn-group-toggle {
+    background-color: #eee;
+    padding: 20px; }
+  .content .btn {
     margin-right: 2.5px;
     margin-left: 2.5px; }

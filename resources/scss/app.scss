@@ -32,10 +32,11 @@ nav {
     .master-ingredients {
         display: flex;
         justify-content: center;
-        background-color: #eee
+        background-color: #eee;
+        padding: 20px;
     }
 
-    .btn-group-toggle {
+    .btn {
         margin-right: 2.5px;
         margin-left: 2.5px;
     }
