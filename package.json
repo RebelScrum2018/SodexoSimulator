@@ -17,8 +17,11 @@
   },
   "homepage": "https://github.com/RebelScrum2018/SodexoSimulator#readme",
   "dependencies": {
+    "bootstrap": "^4.0.0",
     "browser-sync": "^2.23.6",
     "gulp": "^3.9.1",
-    "gulp-sass": "^3.1.0"
+    "gulp-sass": "^3.1.0",
+    "jquery": "^3.0.0",
+    "popper.js": "^1.12.9"
   }
 }
