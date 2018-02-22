@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body>
+<body onload="mySetup">
     <nav>
         <div class="logo">
             <img src="./assets/sodexo.jpg" alt="">
@@ -36,11 +36,12 @@
     <script src="./node_modules/popper.js/dist/popper.min.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
-        $(document).ready(function() {
+        $(Document).ready(function() {
             $(".master-ingredients btn").click(function() {
                 
             });
         })
     </script>
+    <script src="js/customer.js"></script>
 </body>
 </html>
