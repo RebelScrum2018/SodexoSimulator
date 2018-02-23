@@ -48,14 +48,18 @@ class Customer {
         var dead = 0;
         for (var i = 0; i < this.healthy; i++){
             randInt = Math.floor(Math.random() * satisfaction);
-            if (randInt < 35 && randInt > 7) {
+            if (randInt < 30) {
                 sick += 1;
             } 
-            else if (randInt == 0) {
-                dead += 1;
-            }
         }
         this.setSick(sick);
+		
+		for (var i = 0; i < this.sick; i++ ) {
+			randInt = Math.floor(Math.random() * satisfaction);
+			if (randInt < 7) {
+				dead += 1;
+			}
+		}
         this.setDead(dead);
     }
 }
