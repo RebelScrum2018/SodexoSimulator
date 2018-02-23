@@ -9,7 +9,6 @@ class IngredientList{
 			}
 		}
 	}
-	
 }
 
 class Ingredient{
@@ -114,3 +113,4 @@ burgerRecipe.setIngredient(bread, "Bun");
 burgerRecipe.setIngredient(cheese, "Topping");
 
 
+   

@@ -19,7 +19,7 @@
     <div class="content container">
         <div class="row">
             <div class="col-4">
-                <h4>Master Ingredient List</h4>
+                <h4>Grill Station Ingredients</h4>
                 <div class="master-ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
                     <button id="ingredient1" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Sausage</button>
                     <button id="ingredient2" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Eggs</button>
@@ -33,19 +33,18 @@
                 <h4>Burger Recipe</h4>
                 <div class="recipe-container">
                     <h5>Bun</h5>
-                    <div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="part1" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                     <h5>Patty</h5>
-                    <div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="part2" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                     <h5>Topping</h5>
-                    <div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <div id="part3" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
                 </div>
             </div>
             <div class="col-4">
                 <h4>Output</h4>
                 <div class="recipe-container">
-                    <h5>Insert Name Here</h5>
-                    <h5>Customer Rating</h5>
-                    <h5>Score</h5>
+                    <h5 id="dishName">Insert Name Here</h5>
+                    <h5 id="rating">Customer Rating</h5>
                 </div>
             </div>
         </div>
@@ -54,6 +53,7 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
+
         })
 
         function allowDrop(ev) {
@@ -68,10 +68,31 @@
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             
-            if (!ev.target.id.includes("ingredient"))
-                ev.target.appendChild(document.getElementById(data));
+            if (!ev.target.id.includes("ingredient")) {
+                ev.target.appendChild(document.getElementById(data));                
+                partName = $(ev.target).prev()[0].innerHTML;
+                ingredientName = document.getElementById(data).innerHTML;
+                burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
+                console.log(burgerRecipe)
+            }
+
+            if (allPartsFilled()) {
+                $("#dishName").text(burgerRecipe.printDishName())
+                $("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
+            }
+        }
+
+        function allPartsFilled() {
+            filled = true;
+            $(".recipe-container div[id*=part]").each(function () {
+                console.log($(this)[0].firstChild)
+                if ($(this)[0].firstChild == null)
+                    filled = false;
+            });
+            return filled;
         }
     </script>
+    <script src="js/recipe.js"></script>
     <script src="js/customer.js"></script>
 </body>
 </html>

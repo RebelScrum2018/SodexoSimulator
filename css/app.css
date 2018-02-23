@@ -32,7 +32,8 @@ nav {
     flex-direction: column;
     background-color: #eee;
     padding: 20px;
-    margin-right: 20px; }
+    margin-left: 10px;
+    margin-right: 10px; }
     .content .recipe-container .recipe-ingredient {
       display: block;
       height: 46px;
@@ -40,7 +41,7 @@ nav {
       border: 1px dashed black;
       margin-bottom: 5px; }
       .content .recipe-container .recipe-ingredient .btn {
-        width: 98%; }
+        width: 99%; }
   .content .btn {
     margin: 2.5px;
     user-select: none; }
