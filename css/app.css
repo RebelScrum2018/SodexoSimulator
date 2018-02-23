@@ -21,11 +21,26 @@ nav {
 
 .content {
   margin-top: 20px; }
-  .content .master-ingredients {
+  .content div[class*=-ingredients] {
     display: flex;
-    justify-content: center;
+    flex-direction: column;
     background-color: #eee;
-    padding: 20px; }
+    padding: 20px;
+    margin-right: 20px; }
+  .content .recipe-container {
+    display: flex;
+    flex-direction: column;
+    background-color: #eee;
+    padding: 20px;
+    margin-right: 20px; }
+    .content .recipe-container .recipe-ingredient {
+      display: block;
+      height: 46px;
+      width: 100%;
+      border: 1px dashed black;
+      margin-bottom: 5px; }
+      .content .recipe-container .recipe-ingredient .btn {
+        width: 98%; }
   .content .btn {
-    margin-right: 2.5px;
-    margin-left: 2.5px; }
+    margin: 2.5px;
+    user-select: none; }

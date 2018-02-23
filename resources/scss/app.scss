@@ -29,15 +29,36 @@ nav {
 .content {
     margin-top: 20px;
    
-    .master-ingredients {
+    div[class*=-ingredients] {
         display: flex;
-        justify-content: center;
+        flex-direction: column;
         background-color: #eee;
         padding: 20px;
+        margin-right: 20px;
+    }
+
+    .recipe-container {
+        display: flex;
+        flex-direction: column;
+        background-color: #eee;
+        padding: 20px;
+        margin-right: 20px;
+
+        .recipe-ingredient {
+            display: block;
+            height: 46px;
+            width: 100%;
+            border: 1px dashed black;
+            margin-bottom: 5px;
+
+            .btn {
+                width: 98%
+            }
+        }
     }
 
     .btn {
-        margin-right: 2.5px;
-        margin-left: 2.5px;
+       margin: 2.5px;
+       user-select: none;
     }
 }

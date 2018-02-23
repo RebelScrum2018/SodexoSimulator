@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="./node_modules/bootstrap/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="css/app.css">
 </head>
-<body onload="mySetup">
+<body>
     <nav>
         <div class="logo">
             <img src="./assets/sodexo.jpg" alt="">
@@ -18,29 +18,68 @@
     </nav>
     <div class="content container">
         <div class="row">
-            <div class="master-ingredients col align-self-center">
-                <button type="button" class="btn btn-primary">Sausage</button>
-                <button type="button" class="btn btn-primary">Eggs</button>
-                <button type="button" class="btn btn-primary">Cheese</button>
-                <button type="button" class="btn btn-primary">Mushroom</button>
-                <button type="button" class="btn btn-primary">Waffle</button>
-                <button type="button" class="btn btn-primary">Wheat Bread</button>
+            <div class="col-4">
+                <h4>Master Ingredient List</h4>
+                <div class="master-ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
+                    <button id="ingredient1" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Sausage</button>
+                    <button id="ingredient2" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Eggs</button>
+                    <button id="ingredient3" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Cheese</button>
+                    <button id="ingredient4" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Mushroom</button>
+                    <button id="ingredient5" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Waffle</button>
+                    <button id="ingredient6" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Wheat Bread</button>
+                </div>
             </div>
-        </div>
-        <div class="row">
-            <div id="grill" class="col align-self-center">
+            <div class="col-4">
+                <h4>Burger Recipe</h4>
+                <div class="recipe-container">
+                    <h5>Bun</h5>
+                    <div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <h5>Patty</h5>
+                    <div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                    <h5>Topping</h5>
+                    <div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+                </div>
+            </div>
+            <div class="col-4">
+                <h4>Output</h4>
+                <div class="recipe-container">
+                    <h5>Insert Name Here</h5>
+                    <h5>Customer Rating</h5>
+                    <h5>Score</h5>
+                </div>
             </div>
         </div>
     </div>
     <script src="./node_modules/jquery/dist/jquery.min.js"></script>
-    <script src="./node_modules/popper.js/dist/popper.min.js"></script>
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
-        $(Document).ready(function() {
-            $(".master-ingredients btn").click(function() {
-                
+        $(document).ready(function() {
+            $(".master-ingredients .btn").click(function() {
+                console.log($(this))
+                $("#grill").append('<button type="button" class="btn btn-primary">' + $(this)[0].innerHTML + '</button>');
+                $(this).remove();
+            });
+
+            $(".grill-ingredients > button").click(function() {
+                console.log($(this))
+                $(".master-ingredients").append('<button type="button" class="btn btn-primary">' + $(this)[0].innerHTML + '</button>');
+                $(this).remove();
             });
         })
+
+        function allowDrop(ev) {
+            ev.preventDefault();
+        }
+
+        function drag(ev) {
+            ev.dataTransfer.setData("text", ev.target.id);
+        }
+
+        function drop(ev) {
+            ev.preventDefault();
+            var data = ev.dataTransfer.getData("text");
+            ev.target.appendChild(document.getElementById(data));
+        }
     </script>
     <script src="js/customer.js"></script>
 </body>
