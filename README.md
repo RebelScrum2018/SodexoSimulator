@@ -1,5 +1,5 @@
 # SodexoSimulator
 
 Clone the repo
-`npm install`
-`gulp`
+Run `npm install`
+Run `gulp`
