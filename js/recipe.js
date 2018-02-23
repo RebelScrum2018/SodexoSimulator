@@ -2,6 +2,13 @@ class IngredientList{
 	constructor(){
 		this.list = []
 	}
+	searchList(name){
+		for (let i = 0; i < this.list.length; i++) {
+			if (this.list[i].name == name){
+				return this.list[i]
+			}
+		}
+	}
 	
 }
 
@@ -105,4 +112,5 @@ burgerRecipe.dishName = "&Patty and &Topping Burger on &Bun Bun";
 burgerRecipe.setIngredient(beef, "Patty");
 burgerRecipe.setIngredient(bread, "Bun");
 burgerRecipe.setIngredient(cheese, "Topping");
+
 
