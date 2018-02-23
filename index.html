@@ -54,17 +54,6 @@
     <script src="./node_modules/bootstrap/dist/js/bootstrap.min.js"></script>
     <script>
         $(document).ready(function() {
-            $(".master-ingredients .btn").click(function() {
-                console.log($(this))
-                $("#grill").append('<button type="button" class="btn btn-primary">' + $(this)[0].innerHTML + '</button>');
-                $(this).remove();
-            });
-
-            $(".grill-ingredients > button").click(function() {
-                console.log($(this))
-                $(".master-ingredients").append('<button type="button" class="btn btn-primary">' + $(this)[0].innerHTML + '</button>');
-                $(this).remove();
-            });
         })
 
         function allowDrop(ev) {
@@ -78,7 +67,9 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            ev.target.appendChild(document.getElementById(data));
+            
+            if (!ev.target.id.includes("ingredient"))
+                ev.target.appendChild(document.getElementById(data));
         }
     </script>
     <script src="js/customer.js"></script>
