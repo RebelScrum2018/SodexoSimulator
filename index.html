@@ -45,6 +45,9 @@
                 <div class="recipe-container">
                     <h5 id="dishName">Dish Name</h5>
                     <h5 id="rating">Customer Satisfaction:</h5>
+                    <h5 id="healthy"></h5>
+                    <h5 id="sick"></h5>
+                    <h5 id="dead"> </h5>
                 </div>
             </div>
         </div>
@@ -68,6 +71,8 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
+            var population = 1000;
+            var c = new Customer(population);
             
             if (!ev.target.id.includes("ingredient")) {
                 ev.target.appendChild(document.getElementById(data));                
@@ -78,8 +83,12 @@
             }
 
             if (allPartsFilled()) {
+                c.calculateSick(burgerRecipe.getSatisfaction());
                 $("#dishName").text(burgerRecipe.printDishName())
                 $("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
+                $("#healthy").text("Healthy Students: " + c.getHealthy() )
+                $("#sick").text("Sick Students: " + c.getSick())
+                $("#dead").text("Dead Students: " + c.getDead())
             } else {
                 $("#dishName").text("Dish Name")
                 $("#rating").text("Customer Satisfaction:")
