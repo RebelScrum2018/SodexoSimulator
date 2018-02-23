@@ -1,3 +1,10 @@
+class IngredientList{
+	constructor(){
+		this.list = []
+	}
+	
+}
+
 class Ingredient{
     constructor(name, group){
         this.name = name;
@@ -24,6 +31,13 @@ class Recipe{
         this.dishName = null
     }
     
+	 setIngredient(ingredient, partName){
+        for (let i = 0; i < this.parts.length; i++) {
+            if (this.parts[i].name == partName){
+                this.parts[i].ingredient = ingredient;
+            }
+        }
+    }
     printParts(){
         for (let i = 0; i < this.parts.length; i++) {
             console.log(this.parts[i].name);
@@ -52,13 +66,14 @@ class Recipe{
 			satisfaction += 10;
 			}
 	}
+		console.log(satisfaction);
 		return satisfaction;
 	}
 }
 
 //Define Ingredients
 //Save these into ingredient data file later
-bread = new Ingredient("Bread", "Grain");
+bread = new Ingredient("Wheat Bread", "Grain");
 beef = new Ingredient("Beef", "Protein");
 mushroom = new Ingredient("Mushroom", "Vegetable");
 cheese = new Ingredient("Cheese", "Dairy");
@@ -67,6 +82,15 @@ sausage = new Ingredient("Sausage", "Protein");
 eggs = new Ingredient("Eggs", "Protein");
 //Define Recipe Parts
 //Save these into recipe data file later
+iList = new IngredientList();
+iList.list.push(bread)
+iList.list.push(beef)
+iList.list.push(mushroom)
+iList.list.push(cheese)
+iList.list.push(waffle)
+iList.list.push(sausage)
+iList.list.push(eggs)
+
 bunPart = new Part("Bun", bread);
 pattyPart = new Part("Patty", beef);
 toppingPart = new Part("Topping", cheese);
@@ -78,6 +102,7 @@ burgerRecipe.parts.push(bunPart);
 burgerRecipe.parts.push(pattyPart);
 burgerRecipe.parts.push(toppingPart);
 burgerRecipe.dishName = "&Patty and &Topping Burger on &Bun Bun";
-burgerRecipe.parts[0].setIngredient(bread);
-burgerRecipe.parts[1].setIngredient(beef);
-burgerRecipe.parts[2].setIngredient(cheese);
+burgerRecipe.setIngredient(beef, "Patty");
+burgerRecipe.setIngredient(bread, "Bun");
+burgerRecipe.setIngredient(cheese, "Topping");
+
