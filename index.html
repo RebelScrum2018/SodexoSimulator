@@ -43,11 +43,13 @@
             <div class="col-4">
                 <h4>Output</h4>
                 <div class="recipe-container">
+					<h5 id="day"></h5>
+					<h5 id="meal"></h5>
                     <h5 id="dishName">Dish Name</h5>
                     <h5 id="rating">Customer Satisfaction:</h5>
                     <h5 id="healthy"></h5>
                     <h5 id="sick"></h5>
-                    <h5 id="dead"> </h5>
+                    <h5 id="dead"></h5>
                 </div>
             </div>
         </div>
@@ -55,9 +57,14 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
-    <script>
+    <script src="js/recipe.js"></script>
+    <script src="js/customer.js"></script>
+	<script src="js/game.js"></script>
+	<script>
+		var game = new GameControl();
+		
         $(document).ready(function() {
-
+			
         })
 
         function allowDrop(ev) {
@@ -67,32 +74,34 @@
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
-
+		
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            var population = 1000;
-            var c = new Customer(population);
             
-            if (!ev.target.id.includes("ingredient")) {
-                ev.target.appendChild(document.getElementById(data));                
-                partName = $(ev.target).prev()[0].innerHTML;
-                ingredientName = document.getElementById(data).innerHTML;
-                burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
-                console.log(burgerRecipe)
-            }
+			if (!ev.target.id.includes("ingredient")) {
+				ev.target.appendChild(document.getElementById(data));                
+				partName = $(ev.target).prev()[0].innerHTML;
+				ingredientName = document.getElementById(data).innerHTML;
+				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
+				console.log(burgerRecipe)
+			}
 
-            if (allPartsFilled()) {
-                c.calculateSick(burgerRecipe.getSatisfaction());
-                $("#dishName").text(burgerRecipe.printDishName())
-                $("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
-                $("#healthy").text("Healthy Students: " + c.getHealthy() )
-                $("#sick").text("Sick Students: " + c.getSick())
-                $("#dead").text("Dead Students: " + c.getDead())
-            } else {
-                $("#dishName").text("Dish Name")
-                $("#rating").text("Customer Satisfaction:")
-            }
+			if (allPartsFilled()) {
+				game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
+				$("#dishName").text(burgerRecipe.printDishName())
+				$("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
+				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
+				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
+				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
+				
+			} else {
+				$("#day").text("Current Day: " + game.getDay())
+				$("#meal").text("Meal: " + game.getMeal())
+				$("#dishName").text("Dish Name")
+				$("#rating").text("Customer Satisfaction:")
+			}
+		
         }
 
         function allPartsFilled() {
@@ -105,7 +114,6 @@
             return filled;
         }
     </script>
-    <script src="js/recipe.js"></script>
-    <script src="js/customer.js"></script>
+    
 </body>
 </html>
