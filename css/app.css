@@ -20,13 +20,26 @@ nav {
       height: 45px; }
 
 .content {
-  margin-top: 20px; }
-  .content div[class*=-ingredients] {
+  margin-top: 20px;
+  display: flex; }
+  .content .stations {
+    flex: 1; }
+    .content .stations .station {
+      display: flex;
+      justify-content: flex-start;
+      margin-bottom: 20px; }
+      .content .stations .station .station-content {
+        flex: 1;
+        max-width: 300px;
+        margin: 0px 10px; }
+  .content .master-ingredients {
+    width: 300px;
+    margin: 0px 10px; }
+  .content .ingredients {
     display: flex;
     flex-direction: column;
     background-color: #eee;
-    padding: 20px;
-    margin-right: 20px; }
+    padding: 20px; }
   .content .recipe-container {
     display: flex;
     flex-direction: column;
