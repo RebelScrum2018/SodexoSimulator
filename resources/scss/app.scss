@@ -28,13 +28,35 @@ nav {
 
 .content {
     margin-top: 20px;
-   
-    div[class*=-ingredients] {
+    display: flex;
+
+    .stations {
+        flex: 1;
+
+        .station {
+            display: flex;
+            justify-content: flex-start;
+            margin-bottom: 20px;
+
+            .station-content {
+                flex: 1;
+                max-width: 300px;
+                margin: 0px 10px;
+            }
+        }
+       
+    }
+
+    .master-ingredients {
+        width: 300px;
+        margin: 0px 10px;
+    }
+
+    .ingredients {
         display: flex;
         flex-direction: column;
         background-color: #eee;
         padding: 20px;
-        margin-right: 20px;
     }
 
     .recipe-container {
