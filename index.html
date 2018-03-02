@@ -25,8 +25,7 @@
     </div>
 
     <div class="content">
-        <div class="stations">
-        </div>
+        <div class="stations"></div>
     </div>
     <script
     src="https://code.jquery.com/jquery-3.3.1.min.js"
@@ -58,8 +57,9 @@
             $.getJSON("js/recipeData.json", function(data) {
                 $.each(data["recipeLists"], function(key, val) {
                     var name = getStationNameFromId(key)
+                    var count = getRecipeIndex(val)
                     $.each(val, function(key, val) {
-                        generateStationWithRecipe(name, val[0]);
+                        generateStationWithRecipe(name, val[count]);
                     });
                 });
             });
@@ -69,14 +69,26 @@
             var stationId = "station" + guid();
             $(".stations").append("<div id='" + stationId + "' class='station'></div>");
             $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+            for (var i = 0; i < 5; i++) {
+                $("#" + stationId).find(".ingredients").append('<div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');               
+            }
             $("#" + stationId).append('<div class="station-content"><h4>' + recipe.recipeName + ' Recipe</h4><div class="recipe-container"></div></div>');
             //$("#" + stationId).find("recipe-container")
             $.each(recipe.parts, function(key, val) {
-                console.log(val);
                 $("#" + stationId).find(".recipe-container").append('<h5>' + val.name + '</h5>');
                 $("#" + stationId).find(".recipe-container").append('<div id="part' + guid() + '" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
             });
-            $("#" + stationId).append('<div class="station-content"><h4>Output</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
+            $("#" + stationId).append('<div class="station-content"><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
+        }
+
+        function getRecipeIndex(object) {
+            var count = 0
+            $.each(object, function(key, val) {
+                $.each(val, function(key, val) {
+                    count++
+                });
+            });
+            return Math.floor(Math.random() * count);
         }
 
         function getStationNameFromId(num) {

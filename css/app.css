@@ -44,6 +44,15 @@ nav {
   .ingredients .btn {
     margin: 2px 0px; }
 
+.recipe-ingredient {
+  display: block;
+  height: 46px;
+  width: 100%;
+  border: 1px dashed black;
+  margin-bottom: 5px; }
+  .recipe-ingredient .btn {
+    width: 98%; }
+
 .content {
   margin-top: 100px;
   position: relative;
@@ -58,21 +67,13 @@ nav {
       margin-bottom: 20px; }
       .content .stations .station .station-content {
         flex: 1;
-        max-width: 300px;
+        max-width: 400px;
         margin: 0px 10px; }
   .content .recipe-container {
     display: flex;
     flex-direction: column;
     background-color: #eee;
     padding: 20px; }
-    .content .recipe-container .recipe-ingredient {
-      display: block;
-      height: 46px;
-      width: 100%;
-      border: 1px dashed black;
-      margin-bottom: 5px; }
-      .content .recipe-container .recipe-ingredient .btn {
-        width: 98%; }
   .content .btn {
     margin: 2.5px;
     user-select: none; }

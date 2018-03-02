@@ -55,6 +55,18 @@ nav {
     }
 }
 
+.recipe-ingredient {
+    display: block;
+    height: 46px;
+    width: 100%;
+    border: 1px dashed black;
+    margin-bottom: 5px;
+
+    .btn {
+        width: 98%;
+    }
+}
+
 .content {
     margin-top: 100px;
     position: relative;
@@ -72,7 +84,7 @@ nav {
 
             .station-content {
                 flex: 1;
-                max-width: 300px;
+                max-width: 400px;
                 margin: 0px 10px;
             }
         }
@@ -84,18 +96,6 @@ nav {
         flex-direction: column;
         background-color: #eee;
         padding: 20px;
-
-        .recipe-ingredient {
-            display: block;
-            height: 46px;
-            width: 100%;
-            border: 1px dashed black;
-            margin-bottom: 5px;
-
-            .btn {
-                width: 98%;
-            }
-        }
     }
 
     .btn {
