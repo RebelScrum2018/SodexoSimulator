@@ -1,14 +1,14 @@
 class IngredientList{
-	constructor(){
-		this.list = []
-	}
-	searchList(name){
-		for (let i = 0; i < this.list.length; i++) {
-			if (this.list[i].name == name){
-				return this.list[i]
-			}
-		}
-	}
+    constructor(){
+        this.list = [];
+    }
+    searchList(name){
+        for (let i = 0; i < this.list.length; i++) {
+            if (this.list[i].name == name){
+                return this.list[i];
+            }
+        }
+    }
 }
 
 class Ingredient{
@@ -32,12 +32,12 @@ class Part{
 
 class Recipe{
     constructor(name){
-        this.name = name
-        this.parts = []
-        this.dishName = null
+        this.name = name;
+        this.parts = [];
+        this.dishName = null;
     }
     
-	 setIngredient(ingredient, partName){
+     setIngredient(ingredient, partName){
         for (let i = 0; i < this.parts.length; i++) {
             if (this.parts[i].name == partName){
                 this.parts[i].ingredient = ingredient;
@@ -61,20 +61,20 @@ class Recipe{
             output = output.replace("&" + this.parts[i].name, this.parts[i].ingredient.name);
         }
         console.log(output);
-		return output
+        return output
     }
-	getSatisfaction(){
-		var satisfaction = 0;
-		for (let i = 0; i < this.parts.length; i++) {
-			if(this.parts[i].ingredient == this.parts[i].target){
-			satisfaction += 30;
-			}else if (this.parts[i].ingredient.group == this.parts[i].target.group){
-			satisfaction += 10;
-			}
-	}
-		console.log(satisfaction);
-		return satisfaction;
-	}
+    getSatisfaction(){
+        var satisfaction = 0;
+        for (let i = 0; i < this.parts.length; i++) {
+            if(this.parts[i].ingredient == this.parts[i].target){
+                satisfaction += 30;
+            }else if (this.parts[i].ingredient.group == this.parts[i].target.group){
+                satisfaction += 10;
+            }
+    }
+        console.log(satisfaction);
+        return satisfaction;
+    }
 }
 
 //Define Ingredients
@@ -89,13 +89,13 @@ eggs = new Ingredient("Eggs", "Protein");
 //Define Recipe Parts
 //Save these into recipe data file later
 iList = new IngredientList();
-iList.list.push(bread)
-iList.list.push(beef)
-iList.list.push(mushroom)
-iList.list.push(cheese)
-iList.list.push(waffle)
-iList.list.push(sausage)
-iList.list.push(eggs)
+iList.list.push(bread);
+iList.list.push(beef);
+iList.list.push(mushroom);
+iList.list.push(cheese);
+iList.list.push(waffle);
+iList.list.push(sausage);
+iList.list.push(eggs);
 
 bunPart = new Part("Bun", bread);
 pattyPart = new Part("Patty", beef);

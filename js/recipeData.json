@@ -1,0 +1,232 @@
+{
+  "recipeLists": [
+    {
+      "grillRecipes": [
+        {
+          "recipeName": "Burger",
+          "dishName": "&Patty and &Topping Burger on &Bun Bun",
+          "parts": [
+            {
+              "name": "Bun",
+              "target": "Wheat Bread"
+            },
+            {
+              "name": "Patty",
+              "target": "Beef"
+            },
+            {
+              "name": "Topping",
+              "target": "Cheese"
+            }
+          ]
+        },
+        {
+          "recipeName": "Quesadilla",
+          "dishName": "&Topping Quesadilla in &Tortilla Tortilla",
+          "parts": [
+            {
+              "name": "Tortilla",
+              "target": "Flour"
+            },
+            {
+              "name": "Topping",
+              "target": "Cheese"
+            }
+          ]
+        },
+        {
+          "recipeName": "BBQ Chicken Wings",
+          "dishName": "&Sauce &Meat Wings",
+          "parts": [
+            {
+              "name": "Meat",
+              "target": "Chicken"
+            },
+            {
+              "name": "Sauce",
+              "target": "BBQ Sauce"
+            }
+          ]
+        },
+        {
+          "recipeName": "Buffalo Chicken Wings",
+          "dishName": "&Sauce &Meat Wings",
+          "parts": [
+            {
+              "name": "Meat",
+              "target": "Chicken"
+            },
+            {
+              "name": "Sauce",
+              "target": "Buffalo Sauce"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "pizzaRecipes": [
+        {
+          "recipeName": "Cheese Pizza",
+          "dishName": "&Topping and &Sauce Pizza on &Dough Dough",
+          "parts": [
+            {
+              "name": "Dough",
+              "target": "Pizza Dough"
+            },
+            {
+              "name": "Sauce",
+              "target": "Marinara Sauce"
+            },
+            {
+              "name": "Topping",
+              "target": "Cheese"
+            }
+          ]
+        },
+        {
+          "recipeName": "Calzone",
+          "dishName": "&Filling and &Sauce Pizza on &Dough Dough",
+          "parts": [
+            {
+              "name": "Dough",
+              "target": "Pizza Dough"
+            },
+            {
+              "name": "Sauce",
+              "target": "Marinara Sauce"
+            },
+            {
+              "name": "Filling",
+              "target": "Sausage"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "euroRecipes": [
+        {
+          "recipeName": "Spaghetti and Meatballs",
+          "dishName": "&Pasta and &Meatballs in &Sauce",
+          "parts": [
+            {
+              "name": "Pasta",
+              "target": "Pasta"
+            },
+            {
+              "name": "Sauce",
+              "target": "Marinara Sauce"
+            },
+            {
+              "name": "Meatballs",
+              "target": "Beef"
+            }
+          ]
+        },
+        {
+          "recipeName": "Shepard's Pie",
+          "dishName": "&Meat and Mashed &Base Shepard's Pie",
+          "parts": [
+            {
+              "name": "Base",
+              "target": "Potatoes"
+            },
+            {
+              "name": "Meat",
+              "target": "Beef"
+            },
+            {
+              "name": "Garnish",
+              "target": "Corn"
+            },
+            {
+              "name": "Sauce",
+              "target": "Gravy"
+            }
+          ]
+        },
+        {
+          "recipeName": "Nachos",
+          "dishName": "&Base and &Topping Nachos",
+          "parts": [
+            {
+              "name": "Tortilla Chips",
+              "target": "Flour"
+            },
+            {
+              "name": "Base",
+              "target": "Beef"
+            },
+            {
+              "name": "Topping",
+              "target": "Cheese"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "internationalRecipes": [
+        {
+          "recipeName": "Noodle Bowl",
+          "dishName": "$Meat and &Veggies &Spaghetti Noodle Bowl",
+          "parts": [
+            {
+              "name": "Noodles",
+              "target": "Spaghetti"
+            },
+            {
+              "name": "Meat",
+              "target": "Chicken"
+            },
+            {
+              "name": "Veggies",
+              "target": "Peppers"
+            }
+          ]
+        },
+        {
+          "recipeName": "Noodle Bowl",
+          "dishName": "Kung Pao $Meat with &Veggies over &Base",
+          "parts": [
+            {
+              "name": "Base",
+              "target": "Rice"
+            },
+            {
+              "name": "Meat",
+              "target": "Chicken"
+            },
+            {
+              "name": "Veggies",
+              "target": "Peppers"
+            }
+          ]
+        },
+        {
+          "recipeName": "California Roll",
+          "dishName": "&Wrap and &Base California Roll with &Meat and &Veggies",
+          "parts": [
+            {
+              "name": "Wrap",
+              "target": "Seadweed"
+            },
+            {
+              "name": "Base",
+              "target": "Rice"
+            },
+            {
+              "name": "Meat",
+              "target": "Crab"
+            },
+            {
+              "name": "Veggies",
+              "target": "Cucumber"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
