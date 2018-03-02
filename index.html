@@ -68,7 +68,7 @@
         function generateStationWithRecipe(name, recipe) {
             var stationId = "station" + guid();
             $(".stations").append("<div id='" + stationId + "' class='station'></div>");
-            $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+            $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients"></div></div>');
             for (var i = 0; i < 5; i++) {
                 $("#" + stationId).find(".ingredients").append('<div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');               
             }
