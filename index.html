@@ -20,13 +20,7 @@
 
         <div class="master-ingredients">
             <h4>Master Ingredients</h4>
-            <div class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
-                <button id="ingredient1" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Sausage</button>
-                <button id="ingredient2" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Eggs</button>
-                <button id="ingredient3" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Cheese</button>
-                <button id="ingredient4" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Mushroom</button>
-                <button id="ingredient5" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Waffle</button>
-                <button id="ingredient6" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">Wheat Bread</button>
+            <div id="master-ingredients" class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
             </div>
         </div>
 
@@ -96,7 +90,10 @@
             </div>
         </div>
     </div>
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script
+    src="https://code.jquery.com/jquery-3.3.1.min.js"
+    integrity="sha256-FgpCb/KJQlLNfOu91ta32o/NMZxltwRo8QtmkMRdAu8="
+    crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
     <script src="js/recipe.js"></script>
@@ -106,8 +103,25 @@
 		var game = new GameControl();
 		
         $(document).ready(function() {
+
+            $.getJSON("js/ingredients.json", function(data) {
+                var items = [];
+                $.each( data["Ingredients"], function( key, val ) {
+                    iList.list.push(new Ingredient(val["name"], val["group"]));
+                    $("#master-ingredients").append(returnButton(val["name"]));
+                });
+
+                $( "<ul/>", {
+                    "class": "my-new-list",
+                    html: items.join( "" )
+                }).appendTo( "body" );
+            });
 			
         })
+
+        function returnButton(name) {
+            return '<button id="ingredient1" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">' + name + '</button>';
+        }
 
         function allowDrop(ev) {
             ev.preventDefault();
