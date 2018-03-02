@@ -49,7 +49,7 @@
         "group":"Condiment"
       },
       {
-        "name":"Pasta",
+        "name":"Spaghetti",
         "group":"Grain"
       },
       {
@@ -71,6 +71,14 @@
       {
         "name":"Cucumber",
         "group":"Vegetable"
+      }
+	  {
+        "name":"Waffle",
+        "group":"Grain"
+      }
+	  {
+        "name":"Sausage",
+        "group":"Meat"
       }
   ]
 }

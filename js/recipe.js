@@ -63,6 +63,7 @@ class Recipe{
         console.log(output);
         return output
     }
+    
     getSatisfaction(){
         var satisfaction = 0;
         for (let i = 0; i < this.parts.length; i++) {
@@ -75,6 +76,43 @@ class Recipe{
         console.log(satisfaction);
         return satisfaction;
     }
+}
+
+class Station{
+    constructor(name){
+        this.name = name;
+        this.stationIngredients = [];
+        this.activeRecipe = null;
+    }
+    
+    addIngredient(ingredient){
+        if(stationIngredients.length < 5){
+            stationIngredients.push(ingredient);
+        }
+    }
+    
+    removeIngredient(ingredient){
+        for(let i = 0; i < stationIngredients.length; i++){
+            if(ingredient.name == stationIngredients[i].name){
+                stationIngredients.splice(i, 1);
+            }
+        }
+    }
+    
+    setRecipe(recipe){
+        this.recipe = recipe;
+    }
+}
+
+function createRecipeFromJSON(jsonData){
+    var newRecipe = new Recipe(jsonData.recipeName);
+    newRecipe.dishName = jsonData.dishName;
+    
+    for(let i = 0; i < jsonData.parts.length; i++){
+        newRecipe.parts.push(new Part(jsonData.parts[i].name, jsonData.parts[i].target));
+    }
+    
+    return newRecipe;
 }
 
 //Define Ingredients
