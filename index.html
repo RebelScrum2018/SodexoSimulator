@@ -26,68 +26,6 @@
 
     <div class="content">
         <div class="stations">
-            <div class="station">
-                <div class="station-content">
-                    <h4>Grill Station Ingredients</h4>
-                    <div class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    </div>
-                </div>
-                <div class="station-content">
-                    <h4>Burger Recipe</h4>
-                    <div class="recipe-container">
-                        <h5>Bun</h5>
-                        <div id="part1" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                        <h5>Patty</h5>
-                        <div id="part2" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                        <h5>Topping</h5>
-                        <div id="part3" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                    </div>
-                </div>
-                <div class="station-content">
-                    <h4>Output</h4>
-                    <div class="recipe-container">
-						<h5 id="day"></h5>
-						<h5 id="meal"></h5>
-                        <h5 id="dishName">Dish Name</h5>
-                        <h5 id="rating">Customer Satisfaction:</h5>
-                        <h5 id="healthy"></h5>
-                        <h5 id="sick"></h5>
-                        <h5 id="dead"> </h5>
-                    </div>
-                </div>
-            </div>
-
-            <div class="station">
-                <div class="station-content">
-                    <h4>Grill Station Ingredients</h4>
-                    <div class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
-                    </div>
-                </div>
-                <div class="station-content">
-                    <h4>Burger Recipe</h4>
-                    <div class="recipe-container">
-                        <h5>Bun</h5>
-                        <div id="part1" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                        <h5>Patty</h5>
-                        <div id="part2" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                        <h5>Topping</h5>
-                        <div id="part3" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
-                    </div>
-                </div>
-                <div class="station-content">
-                    <h4>Output</h4>
-                    <div class="recipe-container">
-						<h5 id="day"></h5>
-						<h5 id="meal"></h5>
-                        <h5 id="dishName">Dish Name</h5>
-                        <h5 id="rating">Customer Satisfaction:</h5>
-                        <h5 id="healthy"></h5>
-                        <h5 id="sick"></h5>
-                        <h5 id="dead"> </h5>
-                    </div>
-
-                </div>
-            </div>
         </div>
     </div>
     <script
@@ -104,16 +42,52 @@
 		
         $(document).ready(function() {
             loadIngredients();
+            loadRecipe();
         });
 
         function loadIngredients() {
             $.getJSON("js/ingredients.json", function(data) {
-                var items = [];
                 $.each( data["Ingredients"], function( key, val ) {
                     iList.list.push(new Ingredient(val["name"], val["group"]));
                     $("#master").append(returnButton(val["name"]));
                 });
             });
+        }
+
+        function loadRecipe(station) {
+            $.getJSON("js/recipeData.json", function(data) {
+                $.each(data["recipeLists"], function(key, val) {
+                    console.log(key)
+                    var name = getStationNameFromId(key)
+                    $.each(val, function(key, val) {
+                        console.log(val[0])
+                        generateStationWithRecipe(name, val[0]);
+                    });
+                });
+            });
+        }
+
+        function generateStationWithRecipe(name, recipe) {
+            var stationId = "station" + guid();
+            $(".stations").append("<div id='" + stationId + "' class='station'></div>");
+            $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)"></div></div>');
+            $("#" + stationId).append('<div class="station-content"><h4>' + recipe.recipeName + ' Recipe</h4><div class="recipe-container"></div></div>');
+            //$("#" + stationId).find("recipe-container")
+            $.each(recipe.parts, function(key, val) {
+                console.log(val);
+                $("#" + stationId).find(".recipe-container").append('<h5>' + val.name + '</h5>');
+                $("#" + stationId).find(".recipe-container").append('<div id="part' + guid() + '" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
+            });
+            $("#" + stationId).append('<div class="station-content"><h4>Output</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
+        }
+
+        function getStationNameFromId(num) {
+            switch(num) {
+                case 0: return "Grill Station"; break;
+                case 1: return "Pizza Station"; break;
+                case 2: return "Euro Station"; break;
+                case 3: return "International Station"; break;
+            }
         }
 
         function returnButton(name) {
