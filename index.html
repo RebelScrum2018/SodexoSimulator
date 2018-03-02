@@ -17,15 +17,14 @@
         </div>
     </nav>
 
-    <div class="content">
-
+    <div class="sidebar">
         <div class="master-ingredients">
             <h4>Master Ingredients</h4>
-            <div id="master-ingredients" class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)">
-            </div>
+            <div id="master-ingredients" class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
+    </div>
 
-
+    <div class="content">
         <div class="stations">
             <div class="station">
                 <div class="station-content">
@@ -104,9 +103,7 @@
 		var game = new GameControl();
 		
         $(document).ready(function() {
-
             loadIngredients();
-			
         });
 
         function loadIngredients() {
@@ -120,7 +117,6 @@
         }
 
         function returnButton(name) {
-
             return '<button id="ingredient' + guid() + '" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">' + name + '</button>';
         }
 
