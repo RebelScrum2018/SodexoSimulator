@@ -104,20 +104,19 @@
 		
         $(document).ready(function() {
 
+            loadIngredients();
+			
+        });
+
+        function loadIngredients() {
             $.getJSON("js/ingredients.json", function(data) {
                 var items = [];
                 $.each( data["Ingredients"], function( key, val ) {
                     iList.list.push(new Ingredient(val["name"], val["group"]));
                     $("#master-ingredients").append(returnButton(val["name"]));
                 });
-
-                $( "<ul/>", {
-                    "class": "my-new-list",
-                    html: items.join( "" )
-                }).appendTo( "body" );
             });
-			
-        })
+        }
 
         function returnButton(name) {
             return '<button id="ingredient1" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">' + name + '</button>';
