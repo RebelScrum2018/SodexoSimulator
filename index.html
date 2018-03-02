@@ -20,7 +20,7 @@
     <div class="sidebar">
         <div class="master-ingredients">
             <h4>Master Ingredients</h4>
-            <div id="master-ingredients" class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
+            <div id="master" class="ingredients" ondrop="drop(event)" ondragover="allowDrop(event)"></div>
         </div>
     </div>
 
@@ -111,7 +111,7 @@
                 var items = [];
                 $.each( data["Ingredients"], function( key, val ) {
                     iList.list.push(new Ingredient(val["name"], val["group"]));
-                    $("#master-ingredients").append(returnButton(val["name"]));
+                    $("#master").append(returnButton(val["name"]));
                 });
             });
         }
@@ -141,7 +141,7 @@
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
             
-			if (!ev.target.id.includes("ingredient")) {
+			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));                
 				partName = $(ev.target).prev()[0].innerHTML;
 				ingredientName = document.getElementById(data).innerHTML;
