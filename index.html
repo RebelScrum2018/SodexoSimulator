@@ -57,10 +57,8 @@
         function loadRecipe(station) {
             $.getJSON("js/recipeData.json", function(data) {
                 $.each(data["recipeLists"], function(key, val) {
-                    console.log(key)
                     var name = getStationNameFromId(key)
                     $.each(val, function(key, val) {
-                        console.log(val[0])
                         generateStationWithRecipe(name, val[0]);
                     });
                 });
