@@ -16,6 +16,7 @@
             <span>Simulator</span>
         </div>
     </nav>
+
     <div class="content">
 
         <div class="master-ingredients">
@@ -119,7 +120,17 @@
         }
 
         function returnButton(name) {
-            return '<button id="ingredient1" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">' + name + '</button>';
+
+            return '<button id="ingredient' + guid() + '" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">' + name + '</button>';
+        }
+
+        function guid() {
+            function s4() {
+                return Math.floor((1 + Math.random()) * 0x10000)
+                .toString(16)
+                .substring(1);
+            }
+            return s4() + s4() + '-' + s4() + '-' + s4() + '-' + s4() + '-' + s4() + s4() + s4();
         }
 
         function allowDrop(ev) {
