@@ -71,35 +71,35 @@
       {
         "name":"Cucumber",
         "group":"Vegetable"
-      }
+      },
 	  {
         "name":"Waffle",
         "group":"Grain"
-      }
+      },
 	  {
         "name":"Sausage",
         "group":"Protein"
-      }
+      },
       {
         "name":"Eggs",
         "group":"Protein"
-      }
+      },
       {
         "name":"Mushroom",
         "group":"Vegetable"
-      }
+      },
       {
         "name":"Milk",
         "group":"Dairy"
-      }
+      },
       {
         "name":"Butter",
         "group":"Dairy"
-      }
+      },
       {
         "name":"Yogurt",
         "group":"Dairy"
-      }
+      },
       {
         "name":"Ice Cream",
         "group":"Dairy"
