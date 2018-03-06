@@ -60,7 +60,6 @@ class Recipe{
             
             output = output.replace("&" + this.parts[i].name, this.parts[i].ingredient.name);
         }
-        console.log(output);
         return output
     }
     
@@ -69,11 +68,11 @@ class Recipe{
         for (let i = 0; i < this.parts.length; i++) {
             if(this.parts[i].ingredient == this.parts[i].target){
                 satisfaction += 30;
-            }else if (this.parts[i].ingredient.group == this.parts[i].target.group){
+            }
+            else if (this.parts[i].ingredient.group == this.parts[i].target.group){
                 satisfaction += 10;
             }
-    }
-        console.log(satisfaction);
+        }
         return satisfaction;
     }
 }
@@ -104,6 +103,24 @@ class Station{
     }
 }
 
+class StationList{
+    constructor(){
+        this.stationList = [];
+    }
+    
+    addStation(name){
+        stationList.push(new Station(name));
+    }
+    
+    getStationByName(name){
+        for (let i = 0; i < this.stationList.length; i++) {
+            if (this.list[i].name == name){
+                return this.stationList[i];
+            }
+        }
+    }
+}
+
 function createRecipeFromJSON(jsonData){
     var newRecipe = new Recipe(jsonData.recipeName);
     newRecipe.dishName = jsonData.dishName;
@@ -114,6 +131,7 @@ function createRecipeFromJSON(jsonData){
     
     return newRecipe;
 }
+
 
 //Define Ingredients
 //Save these into ingredient data file later
