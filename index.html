@@ -38,7 +38,7 @@
 	<script src="js/game.js"></script>
 	<script>
 		var game = new GameControl();
-		
+
         $(document).ready(function() {
             loadIngredients();
             loadRecipe();
@@ -70,15 +70,15 @@
             $(".stations").append("<div id='" + stationId + "' class='station'></div>");
             $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients"></div></div>');
             for (var i = 0; i < 5; i++) {
-                $("#" + stationId).find(".ingredients").append('<div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');               
+                $("#" + stationId).find(".ingredients").append('<div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
             }
-            $("#" + stationId).append('<div class="station-content"><h4>' + recipe.recipeName + ' Recipe</h4><div class="recipe-container"></div></div>');
+            $("#" + stationId).append('<div class="station-content hidden"><h4>' + recipe.recipeName + ' Recipe</h4><div class="recipe-container"></div></div>');
             //$("#" + stationId).find("recipe-container")
             $.each(recipe.parts, function(key, val) {
                 $("#" + stationId).find(".recipe-container").append('<h5>' + val.name + '</h5>');
                 $("#" + stationId).find(".recipe-container").append('<div id="part' + guid() + '" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
             });
-            $("#" + stationId).append('<div class="station-content"><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
+            $("#" + stationId).append('<div class="station-content" hidden><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
         }
 
         function getRecipeIndex(object) {
@@ -120,18 +120,27 @@
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
-		
+
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            
+
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
-				ev.target.appendChild(document.getElementById(data));                
+				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
 				ingredientName = document.getElementById(data).innerHTML;
 				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
 				console.log(burgerRecipe)
 			}
+
+      if ($(ev.target).hasClass("recipe-ingredient")){
+          console.log("here")
+          console.log($(".ingredients").children('.btn').length)
+
+          if ($(".ingredients").children('.btn').length > 5){
+              $(this).removeAttr("allowDrop")
+          }
+      }
 
 			if (allPartsFilled()) {
 				game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
@@ -140,14 +149,14 @@
 				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
 				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
 				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
-				
+
 			} else {
 				$("#day").text("Current Day: " + game.getDay())
 				$("#meal").text("Meal: " + game.getMeal())
 				$("#dishName").text("Dish Name")
 				$("#rating").text("Customer Satisfaction:")
 			}
-		
+
         }
 
         function allPartsFilled() {
@@ -160,6 +169,6 @@
             return filled;
         }
     </script>
-    
+
 </body>
 </html>
