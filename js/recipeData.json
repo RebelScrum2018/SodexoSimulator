@@ -72,11 +72,11 @@
           "parts": [
             {
               "name": "Dough",
-              "target": "Pizza Dough"
+              "target": "Dough"
             },
             {
               "name": "Sauce",
-              "target": "Marinara Sauce"
+              "target": "Marinara"
             },
             {
               "name": "Topping",
@@ -90,15 +90,15 @@
           "parts": [
             {
               "name": "Dough",
-              "target": "Pizza Dough"
+              "target": "Dough"
             },
             {
               "name": "Sauce",
-              "target": "Marinara Sauce"
+              "target": "Marinara"
             },
             {
               "name": "Filling",
-              "target": "Sausage"
+              "target": "Beef"
             }
           ]
         }
@@ -112,11 +112,11 @@
           "parts": [
             {
               "name": "Pasta",
-              "target": "Pasta"
+              "target": "Spaghetti"
             },
             {
               "name": "Sauce",
-              "target": "Marinara Sauce"
+              "target": "Marinara"
             },
             {
               "name": "Meatballs",

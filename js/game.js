@@ -13,6 +13,9 @@ class GameControl {
 	getDay(){
 		return this.day;
 	}
+    incrementDay(){
+        this.day += 1;
+    }
 	playGame() {
 
 		if  (this.customer.getHealthy != 0 && this.customer.getsick != 0) {

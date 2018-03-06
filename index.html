@@ -68,7 +68,7 @@
         function generateStationWithRecipe(name, recipe) {
             var stationId = "station" + guid();
             $(".stations").append("<div id='" + stationId + "' class='station'></div>");
-            $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients"></div></div>');
+            $("#" + stationId).append('<div class="station-content"><h4>' + name + '</h4><div class="ingredients ' + name.replace(/\s+/g,'') +"ingredients" +'"></div></div>');
             for (var i = 0; i < 5; i++) {
                 $("#" + stationId).find(".ingredients").append('<div class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
             }
@@ -78,7 +78,7 @@
                 $("#" + stationId).find(".recipe-container").append('<h5>' + val.name + '</h5>');
                 $("#" + stationId).find(".recipe-container").append('<div id="part' + guid() + '" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
             });
-            $("#" + stationId).append('<div class="station-content" hidden><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
+            $("#" + stationId).append('<div class="station-content hidden"><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
         }
 
         function getRecipeIndex(object) {
@@ -124,7 +124,11 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-
+            var stationFull = new Array(4) 
+            for (var i = 0; i >= stationFull.length;i++) {
+                pr
+            }
+            console.log("here")
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
@@ -132,6 +136,30 @@
 				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
 				console.log(burgerRecipe)
 			}
+            
+            if ($(ev.target).hasClass("recipe-ingredient")){
+                console.log("here")
+                //console.log($(".GrillStationingredients .recipe-ingredient button").length)
+                if ($(".GrillStationingredients .recipe-ingredient button").length > 5){
+                    $(".GrillStationingredients .recipe-ingredient").removeAttr("allowDrop")
+                    stationFull[0] = true
+                }
+                if ($(".PizzaStationingredients .recipe-ingredient button").length > 5){
+                    $(".PizzaStationingredients .recipe-ingredient").removeAttr("allowDrop")
+                    stationFull[1] = true
+                }
+                if ($(".EuroStationingredients .recipe-ingredient button").length > 5){
+                    $(".EuroStationingredients .recipe-ingredient").removeAttr("allowDrop")
+                    stationFull[2] = true
+                }
+                if ($(".InternationalStationingredients .recipe-ingredient button").length > 5){
+                    $(".InternationalStationingredients .recipe-ingredient").removeAttr("allowDrop")
+                    stationFull[3] = true
+                }
+                if (stationFull.every(function(currentValue){return currentValue == true;})){
+                    console.log("All True")
+                }
+            }
 
       if ($(ev.target).hasClass("recipe-ingredient")){
           console.log("here")
@@ -149,7 +177,11 @@
 				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
 				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
 				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
-
+                game.incrementDay()
+                $("#day").text("Current Day: " + game.getDay())
+                $(".recipe-ingredient").empty();
+                loadIngredients()
+               
 			} else {
 				$("#day").text("Current Day: " + game.getDay())
 				$("#meal").text("Meal: " + game.getMeal())
