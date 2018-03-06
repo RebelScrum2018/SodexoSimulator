@@ -16,7 +16,7 @@
             <img src="./assets/sodexo.jpg" alt="">
             <span>Simulator</span>
         </div>
-        <button id="progress" type="button" class="btn btn-primary">Prepare Dishes</button>
+        <button id="progress" type="button" class="btn btn-primary" onclick="next()">Prepare Dishes</button>
     </nav>
 
     <div class="sidebar">
@@ -118,6 +118,12 @@
         function allowDrop(ev) {
             ev.preventDefault();
         }
+        
+        function next() {
+            $(".station-content:nth-child(2)").removeClass("hidden");
+            $("nav h4").text("Prepare Dishes");
+            $("nav .btn").text("Submit Meals");
+        }
 
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
@@ -163,14 +169,14 @@
                 }
             }
 
-      if ($(ev.target).hasClass("recipe-ingredient")){
-          console.log("here")
-          console.log($(".ingredients").children('.btn').length)
+            if ($(ev.target).hasClass("recipe-ingredient")){
+                console.log("here")
+                console.log($(".ingredients").children('.btn').length)
 
-          if ($(".ingredients").children('.btn').length > 5){
-              $(this).removeAttr("allowDrop")
-          }
-      }
+                if ($(".ingredients").children('.btn').length > 5){
+                    $(this).removeAttr("allowDrop")
+                }
+            }
 
 			if (allPartsFilled()) {
 				game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
