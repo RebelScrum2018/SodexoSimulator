@@ -16,6 +16,10 @@ class GameControl {
     incrementDay(){
         this.day += 1;
     }
+    incrementMeal(){
+        this.mealInt += 1;
+        if(this.mealInt > 4){this.mealInt = 1;}
+    }
 	playGame() {
 
 		if  (this.customer.getHealthy != 0 && this.customer.getsick != 0) {

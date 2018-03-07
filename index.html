@@ -120,11 +120,27 @@
         }
         
         function next() {
+            console.log("here")
             $(".station-content:nth-child(2)").removeClass("hidden");
-            $("nav h4").text("Prepare Dishes");
+            $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             $("nav .btn").text("Submit Meals");
+            $("nav .btn").attr("onclick","meal()");
         }
-
+        function meal(){
+            $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
+            game.incrementMeal();
+            //need to keep track of ingredients per station to pass back.  
+            //going to require a station id maybe? idk what this looks like tbh
+            
+            if (game.getMeal() == "Late Night"){
+                game.incrementDay();
+                //Run customer calculation here
+                $("nav .btn").attr("onclick","next()")
+                $(".recipe-ingredient").empty();
+                loadIngredients()
+            }
+        }
+        
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
@@ -132,11 +148,7 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            var stationFull = new Array(4) 
-            for (var i = 0; i >= stationFull.length;i++) {
-                pr
-            }
-            console.log("here")
+            
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
@@ -146,47 +158,38 @@
 			}
             
             if ($(ev.target).hasClass("recipe-ingredient")){
-                console.log("here")
-                //console.log($(".GrillStationingredients .recipe-ingredient button").length)
-                if ($(".GrillStationingredients .recipe-ingredient button").length > 5){
-                    $(".GrillStationingredients .recipe-ingredient").removeAttr("allowDrop")
-                    stationFull[0] = true
+                if ($(".GrillStationingredients .recipe-ingredient button").length >= 5){
+                    $(".GrillStationingredients .recipe-ingredient").removeAttr("ondragover")
+                } 
+   
+                if ($(".PizzaStationingredients .recipe-ingredient button").length >= 5){
+                    $(".PizzaStationingredients .recipe-ingredient").removeAttr("ondragover")
                 }
-                if ($(".PizzaStationingredients .recipe-ingredient button").length > 5){
-                    $(".PizzaStationingredients .recipe-ingredient").removeAttr("allowDrop")
-                    stationFull[1] = true
+                if ($(".EuroStationingredients .recipe-ingredient button").length >= 5){
+                    $(".EuroStationingredients .recipe-ingredient").removeAttr("ondragover")
                 }
-                if ($(".EuroStationingredients .recipe-ingredient button").length > 5){
-                    $(".EuroStationingredients .recipe-ingredient").removeAttr("allowDrop")
-                    stationFull[2] = true
-                }
-                if ($(".InternationalStationingredients .recipe-ingredient button").length > 5){
-                    $(".InternationalStationingredients .recipe-ingredient").removeAttr("allowDrop")
-                    stationFull[3] = true
-                }
-                if (stationFull.every(function(currentValue){return currentValue == true;})){
-                    console.log("All True")
+                if ($(".InternationalStationingredients .recipe-ingredient button").length >= 5){
+                    $(".InternationalStationingredients .recipe-ingredient").removeAttr("ondragover")
                 }
             }
-
-            if ($(ev.target).hasClass("recipe-ingredient")){
-                console.log("here")
-                console.log($(".ingredients").children('.btn').length)
-
-                if ($(".ingredients").children('.btn').length > 5){
-                    $(this).removeAttr("allowDrop")
-                }
-            }
+    
+//            if ($(ev.target).hasClass("recipe-ingredient")){
+//                console.log("here")
+//                console.log($(".ingredients").children('.btn').length)
+//
+//                if ($(".ingredients").children('.btn').length > 5){
+//                    $(this).removeAttr("allowDrop")
+//                }
+//            }
 
 			if (allPartsFilled()) {
+                //Can we seperate customer data into its own output block??
 				game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
 				$("#dishName").text(burgerRecipe.printDishName())
 				$("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
 				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
 				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
 				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
-                game.incrementDay()
-                $("#day").text("Current Day: " + game.getDay())
                 $(".recipe-ingredient").empty();
                 loadIngredients()
                
