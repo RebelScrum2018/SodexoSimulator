@@ -128,21 +128,24 @@
             $("nav .btn").attr("onclick","meal()");
 
         }
-        
+
         function meal(){
             game.incrementMeal();
             $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
+            $("nav .btn").addClass("hidden");
             //need to keep track of ingredients per station to pass back.
             //going to require a station id maybe? idk what this looks like tbh
             if (game.getMeal() == "Breakfast"){
-                $("nav h4").text("Fill up Stations for day " + game.getDay())
+                game.incrementDay();
+                $("nav h4").text("Fill up Stations for day " + game.getDay());
                 $("nav .btn").text("Prepare Dishes")
                 $(".station-content:nth-child(2)").addClass("hidden");
-                game.incrementDay();
                 //Run customer calculation here
-                $("nav .btn").attr("onclick","next()")
+                $("nav .btn").attr("onclick","next()");
                 $(".recipe-ingredient").empty();
-                loadIngredients()
+                loadIngredients();
+
+
             }
         }
 
