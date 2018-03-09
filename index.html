@@ -41,6 +41,7 @@
 	<script>
 		var game = new GameControl();
 
+
         $(document).ready(function() {
             loadIngredients();
             loadRecipe();
@@ -118,29 +119,47 @@
         function allowDrop(ev) {
             ev.preventDefault();
         }
-        
+
         function next() {
             console.log("here")
             $(".station-content:nth-child(2)").removeClass("hidden");
             $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             $("nav .btn").text("Submit Meals");
             $("nav .btn").attr("onclick","meal()");
+
         }
+
         function meal(){
-            $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             game.incrementMeal();
-            //need to keep track of ingredients per station to pass back.  
+            $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
+            $("nav .btn").addClass("disabled")
+            $(".station-content").removeClass("hidden");
+            game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
+            //moved dishName to update at the end of every meal
+            //statistics don't get updated until the end of the day
+    				$("#dishName").text(burgerRecipe.printDishName());
+
+            //need to keep track of ingredients per station to pass back.
             //going to require a station id maybe? idk what this looks like tbh
-            
-            if (game.getMeal() == "Late Night"){
+            if (game.getMeal() == "Breakfast"){
                 game.incrementDay();
+                $("nav h4").text("Fill up Stations for day " + game.getDay());
+                $("nav .btn").text("Prepare Dishes")
+                $(".station-content:nth-child(2)").addClass("hidden");
                 //Run customer calculation here
-                $("nav .btn").attr("onclick","next()")
+                $("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
+        				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
+        				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
+        				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
+                $("nav .btn").attr("onclick","next()");
                 $(".recipe-ingredient").empty();
-                loadIngredients()
+                $("#master").empty()
+                loadIngredients();
+
+
             }
         }
-        
+
         function drag(ev) {
             ev.dataTransfer.setData("text", ev.target.id);
         }
@@ -148,7 +167,7 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            
+
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
@@ -156,12 +175,12 @@
 				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
 				console.log(burgerRecipe)
 			}
-            
+
             if ($(ev.target).hasClass("recipe-ingredient")){
                 if ($(".GrillStationingredients .recipe-ingredient button").length >= 5){
                     $(".GrillStationingredients .recipe-ingredient").removeAttr("ondragover")
-                } 
-   
+                }
+
                 if ($(".PizzaStationingredients .recipe-ingredient button").length >= 5){
                     $(".PizzaStationingredients .recipe-ingredient").removeAttr("ondragover")
                 }
@@ -172,7 +191,7 @@
                     $(".InternationalStationingredients .recipe-ingredient").removeAttr("ondragover")
                 }
             }
-    
+
 //            if ($(ev.target).hasClass("recipe-ingredient")){
 //                console.log("here")
 //                console.log($(".ingredients").children('.btn').length)
@@ -184,16 +203,12 @@
 
 			if (allPartsFilled()) {
                 //Can we seperate customer data into its own output block??
-				game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
-				$("#dishName").text(burgerRecipe.printDishName())
-				$("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
-				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
-				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
-				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
-                $(".recipe-ingredient").empty();
-                loadIngredients()
-               
+                $("nav .btn").removeClass("disabled")
+        //        $(".recipe-ingredient").empty();
+        //        loadIngredients()
+
 			} else {
+        $("nav .btn").addClass("disabled")
 				$("#day").text("Current Day: " + game.getDay())
 				$("#meal").text("Meal: " + game.getMeal())
 				$("#dishName").text("Dish Name")
