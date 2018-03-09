@@ -54,7 +54,7 @@ class Recipe{
         var output = this.dishName;
         for (let i = 0; i < this.parts.length; i++) {
             if(this.parts[i].ingredient == null){
-                console.log("Incomplete Recipe");
+                output = "Incomplete Recipe";
                 break;
             }
 
@@ -66,7 +66,11 @@ class Recipe{
     getSatisfaction(){
         var satisfaction = 0;
         for (let i = 0; i < this.parts.length; i++) {
-            if(this.parts[i].ingredient == this.parts[i].target){
+            if(this.parts[i].ingredient == null){
+                satisfaction = 0;
+                break;
+            }
+            else if(this.parts[i].ingredient == this.parts[i].target){
                 satisfaction += 30;
             }
             else if (this.parts[i].ingredient.group == this.parts[i].target.group){
@@ -129,12 +133,12 @@ class StationList{
     }
 }
 
-function createRecipeFromJSON(jsonData){
+function createRecipeFromJSON(jsonData, iList){
     var newRecipe = new Recipe(jsonData.recipeName);
     newRecipe.dishName = jsonData.dishName;
 
     for(let i = 0; i < jsonData.parts.length; i++){
-        newRecipe.parts.push(new Part(jsonData.parts[i].name, jsonData.parts[i].target));
+        newRecipe.parts.push(new Part(jsonData.parts[i].name, iList.searchList(jsonData.parts[i].target)));
     }
 
     return newRecipe;

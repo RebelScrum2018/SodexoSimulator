@@ -91,7 +91,7 @@
             });
             $("#" + stationId).append('<div class="station-content hidden"><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
 
-            sList.addStation(name, createRecipeFromJSON(recipe));
+            sList.addStation(name, createRecipeFromJSON(recipe, iList));
         }
 
         function getRecipeIndex(object) {
@@ -131,7 +131,6 @@
         }
 
         function next() {
-            console.log("here")
             $(".station-content:nth-child(2)").removeClass("hidden");
             $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             $("nav .btn").text("Submit Meals");
@@ -144,6 +143,7 @@
         }
 
         function meal(){
+
             game.incrementMeal();
             $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             $("nav .btn").addClass("disabled")
@@ -151,7 +151,16 @@
             game.getCustomer().calculateSick(burgerRecipe.getSatisfaction());
             //moved dishName to update at the end of every meal
             //statistics don't get updated until the end of the day
-    				$("#dishName").text(burgerRecipe.printDishName());
+    				//$("#dishName").text(burgerRecipe.printDishName());
+
+            $('*[id*=dishName]').each(function(i) {
+                $(this).text("Dish Name: " + sList.getStationByName(getStationNameFromId(i)).activeRecipe.printDishName());
+            });
+
+            $('*[id*=rating]').each(function(i) {
+                $(this).text("Customer Satisfaction: " + sList.getStationByName(getStationNameFromId(i)).activeRecipe.getSatisfaction() + "%");
+            });
+
             //  console.log(ingredients)
             //$$('.GrillStationingredients')
             //$('.GrillStationingredients').load(ingredients)
@@ -168,20 +177,29 @@
             $('.InternationalStationingredients').append(internationalIngredients.clone())
             //$('.ingredients').load(ingredients)
 
+            var ratingAvg = 0;
+            for(let i = 0; i < sList.stationList.length; i++){
+                ratingAvg += sList.stationList[i].activeRecipe.getSatisfaction();
+            }
+            ratingAvg /= 4;
+
+            game.getCustomer().calculateSick(ratingAvg)
+            $("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
+            $("#sick").text("Sick Students: " + game.getCustomer().getSick())
+            $("#dead").text("Dead Students: " + game.getCustomer().getDead())
+
             //need to keep track of ingredients per station to pass back.
             //going to require a station id maybe? idk what this looks like tbh
             if (game.getMeal() == "Breakfast"){
                 game.incrementDay();
+
                 $("nav h4").text("Fill up Stations for day " + game.getDay());
                 $("nav .btn").text("Prepare Dishes")
-                $(".station-content:nth-child(2)").addClass("hidden");
-                //Run customer calculation here
-                $("#rating").text("Customer Satisfaction: " + burgerRecipe.getSatisfaction() + "%")
-        				$("#healthy").text("Healthy Students: " + game.getCustomer().getHealthy() )
-        				$("#sick").text("Sick Students: " + game.getCustomer().getSick())
-        				$("#dead").text("Dead Students: " + game.getCustomer().getDead())
+                $(".station-content:nth-child(2)").addClass("hidden")
+
                 $("nav .btn").attr("onclick","next()");
-                $(".recipe-ingredient").empty();
+                $(".recipe-ingredient").empty()
+
                 $("#master").empty()
                 loadIngredients();
 
