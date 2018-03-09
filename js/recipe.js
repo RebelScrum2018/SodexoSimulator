@@ -24,7 +24,7 @@ class Part{
         this.target = target;
         this.ingredient = null;
     }
-    
+
     setIngredient(ingredient){
         this.ingredient = ingredient;
     }
@@ -36,8 +36,8 @@ class Recipe{
         this.parts = [];
         this.dishName = null;
     }
-    
-     setIngredient(ingredient, partName){
+
+    setIngredient(ingredient, partName){
         for (let i = 0; i < this.parts.length; i++) {
             if (this.parts[i].name == partName){
                 this.parts[i].ingredient = ingredient;
@@ -49,7 +49,7 @@ class Recipe{
             console.log(this.parts[i].name);
         }
     }
-    
+
     printDishName(){
         var output = this.dishName;
         for (let i = 0; i < this.parts.length; i++) {
@@ -57,12 +57,12 @@ class Recipe{
                 console.log("Incomplete Recipe");
                 break;
             }
-            
+
             output = output.replace("&" + this.parts[i].name, this.parts[i].ingredient.name);
         }
         return output
     }
-    
+
     getSatisfaction(){
         var satisfaction = 0;
         for (let i = 0; i < this.parts.length; i++) {
@@ -78,18 +78,18 @@ class Recipe{
 }
 
 class Station{
-    constructor(name){
+    constructor(name, recipe){
         this.name = name;
         this.stationIngredients = [];
-        this.activeRecipe = null;
+        this.activeRecipe = recipe;
     }
-    
+
     addIngredient(ingredient){
         if(stationIngredients.length < 5){
             stationIngredients.push(ingredient);
         }
     }
-    
+
     removeIngredient(ingredient){
         for(let i = 0; i < stationIngredients.length; i++){
             if(ingredient.name == stationIngredients[i].name){
@@ -97,7 +97,15 @@ class Station{
             }
         }
     }
-    
+
+    hasIngredient(ingredient){
+        for(let i = 0; i < this.stationIngredients.length; i++){
+            if(ingredient.name == this.stationIngredients[i].name){
+                return true;
+            }
+        }
+    }
+
     setRecipe(recipe){
         this.recipe = recipe;
     }
@@ -107,14 +115,14 @@ class StationList{
     constructor(){
         this.stationList = [];
     }
-    
-    addStation(name){
-        stationList.push(new Station(name));
+
+    addStation(name, recipe){
+        this.stationList.push(new Station(name, recipe));
     }
-    
+
     getStationByName(name){
         for (let i = 0; i < this.stationList.length; i++) {
-            if (this.list[i].name == name){
+            if (name.includes(this.stationList[i].name)){
                 return this.stationList[i];
             }
         }
@@ -124,13 +132,16 @@ class StationList{
 function createRecipeFromJSON(jsonData){
     var newRecipe = new Recipe(jsonData.recipeName);
     newRecipe.dishName = jsonData.dishName;
-    
+
     for(let i = 0; i < jsonData.parts.length; i++){
         newRecipe.parts.push(new Part(jsonData.parts[i].name, jsonData.parts[i].target));
     }
-    
+
     return newRecipe;
 }
+
+iList = new IngredientList();
+sList = new StationList();
 
 
 //Define Ingredients
@@ -144,7 +155,7 @@ sausage = new Ingredient("Sausage", "Protein");
 eggs = new Ingredient("Eggs", "Protein");
 //Define Recipe Parts
 //Save these into recipe data file later
-iList = new IngredientList();
+
 iList.list.push(bread);
 iList.list.push(beef);
 iList.list.push(mushroom);
@@ -167,6 +178,3 @@ burgerRecipe.dishName = "&Patty and &Topping Burger on &Bun Bun";
 burgerRecipe.setIngredient(beef, "Patty");
 burgerRecipe.setIngredient(bread, "Bun");
 burgerRecipe.setIngredient(cheese, "Topping");
-
-
-   

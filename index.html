@@ -86,6 +86,8 @@
                 $("#" + stationId).find(".recipe-container").append('<div id="part' + guid() + '" class="recipe-ingredient" ondrop="drop(event)" ondragover="allowDrop(event)"></div>');
             });
             $("#" + stationId).append('<div class="station-content hidden"><h4>Dish Info</h4><div class="recipe-container"><h5 id="day"></h5><h5 id="meal"></h5><h5 id="dishName">Dish Name</h5><h5 id="rating">Customer Satisfaction:</h5><h5 id="healthy"></h5><h5 id="sick"></h5><h5 id="dead"> </h5></div></div>');
+
+            sList.addStation(name, createRecipeFromJSON(recipe));
         }
 
         function getRecipeIndex(object) {
@@ -171,22 +173,22 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            
+
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
 				ingredientName = document.getElementById(data).innerHTML;
-				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
-				console.log(burgerRecipe)
+                targetStation = $(ev.target).closest('.station').find('.station-content')[0].innerText;
+				        sList.getStationByName(targetStation).activeRecipe.setIngredient(iList.searchList(ingredientName), partName);
 			}
-            
-            if (grillFull == true){  
+
+            if (grillFull == true){
                if ($(".GrillStationingredients .recipe-ingredient button").length != 5){
                     $(".GrillStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
                     grillFull = false
-               } 
+               }
             }
-            if (pizzaFull == true){  
+            if (pizzaFull == true){
                 if ($(".PizzaStationingredients .recipe-ingredient button").length != 5){
                         $(".PizzaStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
                         pizzaFull = false
@@ -204,14 +206,14 @@
                     international = false
                 }
             }
-            
+
             if ($(ev.target).hasClass("recipe-ingredient")){
                 if ($(".GrillStationingredients .recipe-ingredient button").length >= 5){
                     $(".GrillStationingredients .recipe-ingredient").attr("ondragover", "dead")
                     grillFull = true;
                 }
-            
-            
+
+
                 if ($(".PizzaStationingredients .recipe-ingredient button").length >= 5){
                     $(".PizzaStationingredients .recipe-ingredient").attr("ondragover", "dead")
                     pizzaFull = true
