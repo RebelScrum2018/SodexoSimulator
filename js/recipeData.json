@@ -170,7 +170,7 @@
       "internationalRecipes": [
         {
           "recipeName": "Noodle Bowl",
-          "dishName": "$Meat and &Veggies &Spaghetti Noodle Bowl",
+          "dishName": "&Meat and &Veggies &Spaghetti Noodle Bowl",
           "parts": [
             {
               "name": "Noodles",
@@ -188,7 +188,7 @@
         },
         {
           "recipeName": "Noodle Bowl",
-          "dishName": "Kung Pao $Meat with &Veggies over &Base",
+          "dishName": "Kung Pao &Meat with &Veggies over &Base",
           "parts": [
             {
               "name": "Base",
