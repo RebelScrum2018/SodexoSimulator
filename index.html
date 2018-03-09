@@ -136,10 +136,13 @@
             $("nav .btn").text("Submit Meals");
             $("nav .btn").attr("onclick","meal()");
             //$("#master").empty()
-            grillIngredients = $('.GrillStationingredients').clone()
-            pizzaIngredients = $('.PizzaStationingredients').clone()
-            euroIngredients = $('.EuroStationingredients').clone()
-            internationalIngredients = $('.InternationalStationingredients').clone()
+
+            grillIngredients = $('.GrillStationingredients').clone(true)
+            pizzaIngredients = $('.PizzaStationingredients').clone(true)
+            euroIngredients = $('.EuroStationingredients').clone(true)
+            internationalIngredients = $('.InternationalStationingredients').clone(true)
+            console.log("cloned")
+
         }
 
         function meal(){
@@ -161,20 +164,22 @@
                 $(this).text("Customer Satisfaction: " + sList.getStationByName(getStationNameFromId(i)).activeRecipe.getSatisfaction() + "%");
             });
 
+            //$("#dishName").text(burgerRecipe.printDishName());
+
             //  console.log(ingredients)
             //$$('.GrillStationingredients')
             //$('.GrillStationingredients').load(ingredients)
-            $('.GrillStationingredients').empty()
-            $('.PizzaStationingredients').empty()
-            $('.EuroStationingredients').empty()
-            $('.InternationalStationingredients').empty()
+            $(('.GrillStationingredients').parent).empty()
+            $(('.PizzaStationingredients').parent).empty()
+            $(('.EuroStationingredients').parent).empty()
+            $(('.InternationalStationingredients').parent).empty()
             $(".recipe-ingredient").empty()
-            //$(grillIngredients).appendTo('.GrillStationingredients')
-            console.log(grillIngredients)
-            $('.GrillStationingredients').append(grillIngredients.clone())
-            $('.PizzaStationingredients').append(pizzaIngredients.clone())
-            $('.EuroStationingredients').append(euroIngredients.clone())
-            $('.InternationalStationingredients').append(internationalIngredients.clone())
+            //$(grillIngredients.children).appendTo('.GrillStationingredients')
+
+            $('.GrillStationingredients').replaceWith(grillIngredients.clone())
+            $('.PizzaStationingredients').replaceWith(pizzaIngredients.clone())
+            $('.EuroStationingredients').replaceWith(euroIngredients.clone())
+            $('.InternationalStationingredients').replaceWith(internationalIngredients.clone())
             //$('.ingredients').load(ingredients)
 
             var ratingAvg = 0;
@@ -190,7 +195,8 @@
 
             //need to keep track of ingredients per station to pass back.
             //going to require a station id maybe? idk what this looks like tbh
-            if (game.getMeal() == "Breakfast"){
+            if (game.getMeal() == "Late Night"){
+
                 game.incrementDay();
 
                 $("nav h4").text("Fill up Stations for day " + game.getDay());

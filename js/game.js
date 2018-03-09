@@ -24,7 +24,7 @@ class GameControl {
 
 		if  (this.customer.getHealthy != 0 && this.customer.getsick != 0) {
 			this.mealInt += 1;
-			if (mealInt > 4) {this.mealInt = 1; this.day += 1;}
+			if (mealInt > 3) {this.mealInt = 1; this.day += 1;}
 		}
 	}
 	
