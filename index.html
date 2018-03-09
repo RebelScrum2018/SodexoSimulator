@@ -160,10 +160,12 @@
             $('.EuroStationingredients').empty()
             $('.InternationalStationingredients').empty()
             $(".recipe-ingredient").empty()
-            $('.GrillStationingredients').append(grillIngredients)
-            $('.PizzaStationingredients').append(pizzaIngredients)
-            $('.EuroStationingredients').append(euroIngredients)
-            $('.InternationalStationingredients').append(internationalIngredients)
+            //$(grillIngredients).appendTo('.GrillStationingredients')
+            console.log(grillIngredients)
+            $('.GrillStationingredients').append(grillIngredients.clone())
+            $('.PizzaStationingredients').append(pizzaIngredients.clone())
+            $('.EuroStationingredients').append(euroIngredients.clone())
+            $('.InternationalStationingredients').append(internationalIngredients.clone())
             //$('.ingredients').load(ingredients)
 
             //need to keep track of ingredients per station to pass back.
