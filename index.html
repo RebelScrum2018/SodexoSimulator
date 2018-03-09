@@ -40,6 +40,10 @@
 	<script src="js/game.js"></script>
 	<script>
 		var game = new GameControl();
+        var grillFull = false;
+        var pizzaFull = false;
+        var euroFull = false;
+        var international = false;
 
 
         $(document).ready(function() {
@@ -167,7 +171,7 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-
+            
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
@@ -175,20 +179,51 @@
 				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
 				console.log(burgerRecipe)
 			}
-
+            
+            if (grillFull == true){  
+               if ($(".GrillStationingredients .recipe-ingredient button").length != 5){
+                    $(".GrillStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
+                    grillFull = false
+               } 
+            }
+            if (pizzaFull == true){  
+                if ($(".PizzaStationingredients .recipe-ingredient button").length != 5){
+                        $(".PizzaStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
+                        pizzaFull = false
+                }
+            }
+            if (euroFull == true){
+                if ($(".EuroStationingredients .recipe-ingredient button").length != 5){
+                    $(".EuroStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
+                    euroFull = false
+                }
+            }
+            if (international == true){
+            if ($(".InternationalStationingredients .recipe-ingredient button").length != 5){
+                    $(".InternationalStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
+                    international = false
+                }
+            }
+            
             if ($(ev.target).hasClass("recipe-ingredient")){
                 if ($(".GrillStationingredients .recipe-ingredient button").length >= 5){
-                    $(".GrillStationingredients .recipe-ingredient").removeAttr("ondragover")
+                    $(".GrillStationingredients .recipe-ingredient").attr("ondragover", "dead")
+                    grillFull = true;
+                }
+            
+            
+                if ($(".PizzaStationingredients .recipe-ingredient button").length >= 5){
+                    $(".PizzaStationingredients .recipe-ingredient").attr("ondragover", "dead")
+                    pizzaFull = true
                 }
 
-                if ($(".PizzaStationingredients .recipe-ingredient button").length >= 5){
-                    $(".PizzaStationingredients .recipe-ingredient").removeAttr("ondragover")
-                }
                 if ($(".EuroStationingredients .recipe-ingredient button").length >= 5){
-                    $(".EuroStationingredients .recipe-ingredient").removeAttr("ondragover")
+                    $(".EuroStationingredients .recipe-ingredient").attr("ondragover", "dead")
+                    euroFull = true
                 }
                 if ($(".InternationalStationingredients .recipe-ingredient button").length >= 5){
-                    $(".InternationalStationingredients .recipe-ingredient").removeAttr("ondragover")
+                    $(".InternationalStationingredients .recipe-ingredient").attr("ondragover", "dead")
+                    international = true
                 }
             }
 
@@ -209,8 +244,6 @@
 
 			} else {
         $("nav .btn").addClass("disabled")
-				$("#day").text("Current Day: " + game.getDay())
-				$("#meal").text("Meal: " + game.getMeal())
 				$("#dishName").text("Dish Name")
 				$("#rating").text("Customer Satisfaction:")
 			}
