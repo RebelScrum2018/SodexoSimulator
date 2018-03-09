@@ -44,6 +44,10 @@
         var pizzaFull = false;
         var euroFull = false;
         var international = false;
+        var grillIngredients;
+        var pizzaIngredients;
+        var euroIngredients;
+        var internationalIngredients;
 
 
         $(document).ready(function() {
@@ -130,7 +134,11 @@
             $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             $("nav .btn").text("Submit Meals");
             $("nav .btn").attr("onclick","meal()");
-
+            //$("#master").empty()
+            grillIngredients = $('.GrillStationingredients').clone()
+            pizzaIngredients = $('.PizzaStationingredients').clone()
+            euroIngredients = $('.EuroStationingredients').clone()
+            internationalIngredients = $('.InternationalStationingredients').clone()
         }
 
         function meal(){
@@ -142,6 +150,19 @@
             //moved dishName to update at the end of every meal
             //statistics don't get updated until the end of the day
     				$("#dishName").text(burgerRecipe.printDishName());
+            //  console.log(ingredients)
+            //$$('.GrillStationingredients')
+            //$('.GrillStationingredients').load(ingredients)
+            $('.GrillStationingredients').empty()
+            $('.PizzaStationingredients').empty()
+            $('.EuroStationingredients').empty()
+            $('.InternationalStationingredients').empty()
+            $(".recipe-ingredient").empty()
+            $('.GrillStationingredients').append(grillIngredients)
+            $('.PizzaStationingredients').append(pizzaIngredients)
+            $('.EuroStationingredients').append(euroIngredients)
+            $('.InternationalStationingredients').append(internationalIngredients)
+            //$('.ingredients').load(ingredients)
 
             //need to keep track of ingredients per station to pass back.
             //going to require a station id maybe? idk what this looks like tbh
@@ -171,7 +192,7 @@
         function drop(ev) {
             ev.preventDefault();
             var data = ev.dataTransfer.getData("text");
-            
+
 			if ($(ev.target).hasClass("ingredients") || $(ev.target).hasClass("recipe-ingredient")) {
 				ev.target.appendChild(document.getElementById(data));
 				partName = $(ev.target).prev()[0].innerHTML;
@@ -179,14 +200,14 @@
 				burgerRecipe.setIngredient(iList.searchList(ingredientName), partName);
 				console.log(burgerRecipe)
 			}
-            
-            if (grillFull == true){  
+
+            if (grillFull == true){
                if ($(".GrillStationingredients .recipe-ingredient button").length != 5){
                     $(".GrillStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
                     grillFull = false
-               } 
+               }
             }
-            if (pizzaFull == true){  
+            if (pizzaFull == true){
                 if ($(".PizzaStationingredients .recipe-ingredient button").length != 5){
                         $(".PizzaStationingredients .recipe-ingredient").attr("ondragover", "drop(event)")
                         pizzaFull = false
@@ -204,14 +225,14 @@
                     international = false
                 }
             }
-            
+
             if ($(ev.target).hasClass("recipe-ingredient")){
                 if ($(".GrillStationingredients .recipe-ingredient button").length >= 5){
                     $(".GrillStationingredients .recipe-ingredient").attr("ondragover", "dead")
                     grillFull = true;
                 }
-            
-            
+
+
                 if ($(".PizzaStationingredients .recipe-ingredient button").length >= 5){
                     $(".PizzaStationingredients .recipe-ingredient").attr("ondragover", "dead")
                     pizzaFull = true
