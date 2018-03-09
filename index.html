@@ -117,6 +117,16 @@
             return '<button id="ingredient' + guid() + '" draggable="true" ondragstart="drag(event)" type="button" class="btn btn-primary">' + name + '</button>';
         }
 
+        function showSidebar() {
+            $(".content").removeClass("full");
+            $(".sidebar").removeClass("hidden");
+        }
+
+        function hideSidebar() {
+            $(".content").addClass("full");
+            $(".sidebar").addClass("hidden");
+        }
+
         function guid() {
             function s4() {
                 return Math.floor((1 + Math.random()) * 0x10000)
@@ -132,6 +142,7 @@
 
         function next() {
             $(".station-content:nth-child(2)").removeClass("hidden");
+            hideSidebar();
             $("nav h4").text("Prepare Day " + game.getDay() +"'s " + game.getMeal() + " dishes");
             $("nav .btn").text("Submit Meals");
             $("nav .btn").attr("onclick","meal()");
@@ -198,6 +209,7 @@
             if (game.getMeal() == "Late Night"){
 
                 game.incrementDay();
+                showSidebar();
 
                 $("nav h4").text("Fill up Stations for day " + game.getDay());
                 $("nav .btn").text("Prepare Dishes")
